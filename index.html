@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertexyield - Institutional Yield, Lightning-Fast Execution</title>
+    <meta name="description" content="Vertexyield - Optimized for high-frequency trading, MEV strategies, and next-gen staking on Solana and multi-chain platforms.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Particle Background Container -->
+    <div id="particles-js" class="particles-container"></div>
+    
+    <!-- Header/Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="#">
+                        <img src="assets/vertexyield-logo.svg" alt="Vertexyield Logo">
+                    </a>
+                </div>
+                <div class="header-nav">
+                    <a href="#strategies" class="nav-link">Yield Strategies</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#whitepaper" class="nav-link">Whitepaper</a>
+                </div>
+                <div class="header-actions">
+                    <a href="#apply" class="btn btn-primary">Join Pilot Program</a>
+                </div>
+                <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Vertexyield</span> – Institutional Yield, Lightning-Fast Execution
+                </h1>
+                <p class="hero-subtitle">
+                    Optimized for high-frequency trading, MEV strategies, and next-gen staking.
+                </p>
+                <div class="hero-cta">
+                    <a href="#apply" class="btn btn-primary btn-large">Join Pilot Program</a>
+                </div>
+                
+                <div class="hero-metrics">
+                    <div class="metric">
+                        <div class="metric-value" data-value="500">0</div>
+                        <div class="metric-label">Total Value Locked Target (M+)</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" data-value="10">0</div>
+                        <div class="metric-label">Available Pilot Pool (M)</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" data-value="65000">0</div>
+                        <div class="metric-label">Solana TPS</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" data-value="100">0</div>
+                        <div class="metric-label">Projected DeFi Growth by 2026 (B+)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="orbit-container">
+                    <div class="orbit orbit-1"></div>
+                    <div class="orbit orbit-2"></div>
+                    <div class="orbit orbit-3"></div>
+                    <div class="glow-center"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Yield Strategies Section -->
+    <section class="strategies" id="strategies">
+        <div class="container">
+            <h2 class="section-title">Yield Strategies</h2>
+            <p class="section-subtitle">Institutional-grade yield opportunities across the Solana ecosystem</p>
+            
+            <div class="strategies-grid">
+                <!-- Strategy 1 -->
+                <div class="strategy-card" data-history="[7, 8, 10, 12, 15]">
+                    <div class="strategy-header">
+                        <h3>Liquid Staking + Jito MEV Rewards</h3>
+                        <div class="apy-range">
+                            <span class="apy-value">7% - 15%</span>
+                            <span class="apy-label">APY</span>
+                        </div>
+                    </div>
+                    <p class="strategy-description">
+                        Maximize yield with Solana liquid staking and MEV extraction.
+                    </p>
+                    <div class="info-icon"><i class="fas fa-info-circle"></i></div>
+                    <div class="strategy-tooltip">
+                        <h4>Historical APY</h4>
+                        <div class="tooltip-chart">
+                            <canvas class="history-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Strategy 2 -->
+                <div class="strategy-card" data-history="[10, 15, 18, 22, 25]">
+                    <div class="strategy-header">
+                        <h3>High-Frequency Trading (HFT) Vaults</h3>
+                        <div class="apy-range">
+                            <span class="apy-value">10% - 25%</span>
+                            <span class="apy-label">APY</span>
+                        </div>
+                    </div>
+                    <p class="strategy-description">
+                        Deploy capital into automated, low-latency trading strategies.
+                    </p>
+                    <div class="info-icon"><i class="fas fa-info-circle"></i></div>
+                    <div class="strategy-tooltip">
+                        <h4>Historical APY</h4>
+                        <div class="tooltip-chart">
+                            <canvas class="history-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Strategy 3 -->
+                <div class="strategy-card" data-history="[12, 18, 25, 30, 35]">
+                    <div class="strategy-header">
+                        <h3>Funding Rate Arbitrage on Solana Perps</h3>
+                        <div class="apy-range">
+                            <span class="apy-value">12% - 35%</span>
+                            <span class="apy-label">APY</span>
+                        </div>
+                    </div>
+                    <p class="strategy-description">
+                        Capture yield from perpetual funding rate discrepancies across Solana DEXs.
+                    </p>
+                    <div class="info-icon"><i class="fas fa-info-circle"></i></div>
+                    <div class="strategy-tooltip">
+                        <h4>Historical APY</h4>
+                        <div class="tooltip-chart">
+                            <canvas class="history-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Strategy 4 -->
+                <div class="strategy-card" data-history="[15, 25, 35, 45, 50]">
+                    <div class="strategy-header">
+                        <h3>Automated Solana MEV Capture</h3>
+                        <div class="apy-range">
+                            <span class="apy-value">15% - 50%</span>
+                            <span class="apy-label">APY</span>
+                        </div>
+                    </div>
+                    <p class="strategy-description">
+                        Front-run inefficiencies with low-latency MEV extraction.
+                    </p>
+                    <div class="info-icon"><i class="fas fa-info-circle"></i></div>
+                    <div class="strategy-tooltip">
+                        <h4>Historical APY</h4>
+                        <div class="tooltip-chart">
+                            <canvas class="history-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Strategy 5 -->
+                <div class="strategy-card" data-history="[5, 7, 9, 10, 12]">
+                    <div class="strategy-header">
+                        <h3>RWA Yield on Solana (Tokenized US Treasuries & Credit)</h3>
+                        <div class="apy-range">
+                            <span class="apy-value">5% - 12%</span>
+                            <span class="apy-label">APY</span>
+                        </div>
+                    </div>
+                    <p class="strategy-description">
+                        Institutional-grade RWA exposure with Solana speed.
+                    </p>
+                    <div class="info-icon"><i class="fas fa-info-circle"></i></div>
+                    <div class="strategy-tooltip">
+                        <h4>Historical APY</h4>
+                        <div class="tooltip-chart">
+                            <canvas class="history-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title">About Vertexyield</h2>
+                <p class="section-subtitle">Institutional-grade yield platform built for Solana and multi-chain expansion</p>
+                
+                <div class="about-features">
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Institutional-Grade Security</h3>
+                        <p>Multi-sig wallets, time-locked contracts, and regular security audits.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3>Multi-Chain Ready</h3>
+                        <p>Starting with Solana, expanding to Ethereum, Avalanche, and more.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Algorithmic Optimization</h3>
+                        <p>AI-powered yield strategies that adapt to market conditions.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3>Compliance-Focused</h3>
+                        <p>KYC/AML procedures and regulatory compliance for institutional clients.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Whitepaper Section -->
+    <section class="whitepaper" id="whitepaper">
+        <div class="container">
+            <h2 class="section-title">Whitepaper</h2>
+            <p class="section-subtitle">Dive deep into our technical architecture and yield strategies</p>
+            
+            <div class="whitepaper-preview">
+                <div class="whitepaper-image">
+                    <img src="assets/whitepaper-preview.svg" alt="Vertexyield Whitepaper">
+                </div>
+                <div class="whitepaper-info">
+                    <h3>Vertexyield: Institutional DeFi Yield Optimization</h3>
+                    <p>Our comprehensive whitepaper details our approach to generating sustainable yield through MEV extraction, high-frequency trading, and innovative staking strategies on Solana.</p>
+                    <a href="#" class="btn btn-secondary">Download Whitepaper</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta" id="apply">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Maximize Solana Yield?</h2>
+                <p class="cta-subtitle">Join our $10M pilot pool and access cutting-edge Solana yield strategies.</p>
+                
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">Apply for Early Access</a>
+                    <a href="#" class="btn btn-secondary">Download Whitepaper</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="assets/vertexyield-logo.svg" alt="Vertexyield Logo">
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Platform</h3>
+                        <a href="#strategies">Yield Strategies</a>
+                        <a href="#about">About</a>
+                        <a href="#whitepaper">Whitepaper</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Legal</h3>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Risk Disclosure</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Contact</h3>
+                        <a href="mailto:info@vertexyield.xyz">info@vertexyield.xyz</a>
+                        <a href="https://twitter.com/vertexyield" target="_blank">Twitter</a>
+                        <a href="https://t.me/vertexyield" target="_blank">Telegram</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vertexyield. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
