@@ -1,76 +1,83 @@
-# VertexYield Landing Page
+# VertexYield - Institutional DeFi Yield Platform
 
-A modern, responsive landing page for VertexYield - an institutional-grade yield platform built on Solana with multi-chain expansion capabilities.
+![VertexYield Logo](assets/vertexyield-logo.svg)
+
+A high-performance landing page for an institutional DeFi yield platform on Solana with multi-chain expansion plans.
+
+## Live Demo
+
+Visit the live site: [https://virginity-construct.github.io/vertexyield/](https://virginity-construct.github.io/vertexyield/)
 
 ## Features
 
 - Responsive design optimized for all devices
-- Interactive animations and hover effects
+- Dark mode UI with Solana-inspired color scheme
+- Interactive animations and transitions
 - Dynamic metrics counter
-- Interactive yield strategy cards with tooltips
-- Particle.js background effects
-- Chart.js integration for APY visualization
+- Interactive yield strategy cards with APY charts
+- Particle background effects
+- Mobile-friendly navigation
 
 ## Tech Stack
 
 - HTML5
-- CSS3 (with CSS variables and modern layout techniques)
-- JavaScript (vanilla)
-- Chart.js for data visualization
+- CSS3
+- Vanilla JavaScript
+- Chart.js for APY visualization
 - Particles.js for background effects
-- Font Awesome for icons
+
+## Quick Start
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/virginity-construct/vertexyield.git
+   ```
+
+2. Navigate to the project directory:
+   ```
+   cd vertexyield
+   ```
+
+3. Open `index.html` in your browser or use a local server.
+
+## GitHub Pages Deployment
+
+This repository is set up for GitHub Pages deployment. The site is automatically deployed from the `master` branch.
+
+To deploy your own version:
+
+1. Fork this repository
+2. Go to your repository settings
+3. Scroll down to the GitHub Pages section
+4. Select the `master` branch as the source
+5. Your site will be published at `https://[your-username].github.io/vertexyield/`
+
+## Custom Domain Setup
+
+For detailed instructions on setting up a custom domain (like vertexyield.xyz), see the [DEPLOYMENT.md](DEPLOYMENT.md) file.
 
 ## Project Structure
 
 ```
 vertexyield-landing/
-├── index.html              # Main HTML file
-├── css/
-│   ├── reset.css           # CSS reset
-│   └── styles.css          # Main stylesheet
-├── js/
-│   └── main.js             # JavaScript functionality
-└── assets/                 # Images, icons, etc.
-    ├── favicon.svg
-    ├── vertexyield-logo.svg
-    └── whitepaper-preview.svg
+├── assets/                # Images and SVG files
+│   ├── favicon.svg
+│   ├── vertexyield-logo.svg
+│   └── whitepaper-preview.svg
+├── css/                   # Stylesheets
+│   ├── reset.css
+│   └── styles.css
+├── js/                    # JavaScript files
+│   └── main.js
+├── index.html             # Main HTML file
+├── README.md              # Project documentation
+└── DEPLOYMENT.md          # Deployment guide
 ```
-
-## Setup
-
-1. Clone the repository
-2. Open `index.html` in your browser
-
-For local development with live reload, you can use any static server like:
-
-```bash
-npx serve
-```
-
-## Deployment
-
-The site is ready for deployment to any static hosting service like:
-
-- GitHub Pages
-- Netlify
-- Vercel
-- AWS S3
-
-## Domain Setup
-
-To set up the custom domain (vertexyield.xyz):
-
-1. Configure DNS records with your domain registrar
-2. Set up HTTPS with your hosting provider
-3. Update any relative URLs if necessary
-
-## Browser Compatibility
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
 
 ## License
 
-All rights reserved.
+MIT
+
+## Contact
+
+For inquiries about VertexYield, please visit [vertexyield.xyz](https://vertexyield.xyz)
