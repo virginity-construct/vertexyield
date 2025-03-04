@@ -344,14 +344,63 @@ function initializeCharts() {
  * Mobile navigation toggle
  */
 function toggleMobileNav() {
+    const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
     const nav = document.querySelector('.header-nav');
+    
+    mobileNavToggle.classList.toggle('active');
     nav.classList.toggle('active');
+    
+    // Prevent scrolling when menu is open
+    document.body.classList.toggle('no-scroll', nav.classList.contains('active'));
+    
+    // Close mobile nav when clicking outside
+    if (nav.classList.contains('active')) {
+        document.addEventListener('click', closeOnClickOutside);
+    } else {
+        document.removeEventListener('click', closeOnClickOutside);
+    }
+}
+
+/**
+ * Close mobile navigation when clicking outside
+ */
+function closeOnClickOutside(event) {
+    const nav = document.querySelector('.header-nav');
+    const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+    
+    // If clicking outside the nav and not on the toggle button
+    if (!nav.contains(event.target) && !mobileNavToggle.contains(event.target)) {
+        mobileNavToggle.classList.remove('active');
+        nav.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+        document.removeEventListener('click', closeOnClickOutside);
+    }
 }
 
 // Add mobile nav toggle button event listener
 document.addEventListener('DOMContentLoaded', () => {
     const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+    const navLinks = document.querySelectorAll('.header-nav .nav-link');
+    
     if (mobileNavToggle) {
-        mobileNavToggle.addEventListener('click', toggleMobileNav);
+        mobileNavToggle.addEventListener('click', function(event) {
+            event.stopPropagation();
+            toggleMobileNav();
+        });
     }
+    
+    // Close mobile nav when clicking on a nav link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const nav = document.querySelector('.header-nav');
+            const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+            
+            if (nav.classList.contains('active')) {
+                mobileNavToggle.classList.remove('active');
+                nav.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+                document.removeEventListener('click', closeOnClickOutside);
+            }
+        });
+    });
 });

@@ -240,19 +240,37 @@ p {
     width: 100%;
 }
 
-.mobile-menu-toggle {
+.mobile-nav-toggle {
     display: none;
     flex-direction: column;
-    gap: 6px;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    background: transparent;
+    border: none;
     cursor: pointer;
+    padding: 0;
+    z-index: var(--z-fixed);
 }
 
-.mobile-menu-toggle span {
+.mobile-nav-toggle span {
     display: block;
-    width: 30px;
+    width: 100%;
     height: 2px;
     background-color: var(--color-text);
     transition: all var(--transition-normal);
+}
+
+.mobile-nav-toggle.active span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+
+.mobile-nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-nav-toggle.active span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
 }
 
 /* Hero Section */
@@ -869,6 +887,11 @@ p {
     transform: translateY(-3px);
 }
 
+/* Utilities */
+.no-scroll {
+    overflow: hidden;
+}
+
 /* Animations */
 @keyframes pulse {
     0% {
@@ -927,12 +950,9 @@ p {
         --font-size-h3: 2.2rem;
     }
     
-    .header-nav {
-        display: none; /* Mobile menu to be implemented with JS */
-    }
-    
     .header-actions {
         margin-left: auto;
+        margin-right: var(--spacing-md);
     }
     
     .hero-title {
@@ -941,6 +961,58 @@ p {
     
     .hero-subtitle {
         font-size: 1.8rem;
+    }
+    
+    .mobile-nav-toggle {
+        display: flex;
+    }
+    
+    .header-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(13, 15, 26, 0.95);
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-lg);
+        transition: right var(--transition-normal);
+        z-index: var(--z-modal);
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+    
+    .header-nav.active {
+        right: 0;
+    }
+    
+    .header-nav .nav-link {
+        font-size: 2rem;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .header-nav::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity var(--transition-normal);
+    }
+    
+    .header-nav.active::before {
+        opacity: 1;
+        visibility: visible;
     }
     
     .strategies-grid {
