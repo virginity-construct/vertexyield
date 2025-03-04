@@ -6,6 +6,16 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Handle loading screen
+    const loadingScreen = document.querySelector('.loading-screen');
+    
+    // Hide loading screen after all content is loaded
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+        }, 800); // Add a slight delay for smoother transition
+    });
+    
     // Initialize all components
     initializeAnimations();
     initializeScrollEffects();
@@ -13,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeMetricsCounter();
     initializeParticles();
     initializeCharts();
+    toggleMobileNav();
 });
 
 /**
@@ -164,98 +175,114 @@ function initializeMetricsCounter() {
  * Requires particles.js library
  */
 function initializeParticles() {
-    // Check if particles.js is loaded
     if (typeof particlesJS !== 'undefined') {
         particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 80,
-                    density: {
-                        enable: true,
-                        value_area: 800
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
                     }
                 },
-                color: {
-                    value: '#8C4FFF'
+                "color": {
+                    "value": "#8C4FFF"
                 },
-                shape: {
-                    type: 'circle',
-                    stroke: {
-                        width: 0,
-                        color: '#000000'
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
                     }
                 },
-                opacity: {
-                    value: 0.3,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 1,
-                        opacity_min: 0.1,
-                        sync: false
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 0.5,
+                        "opacity_min": 0.1,
+                        "sync": false
                     }
                 },
-                size: {
-                    value: 3,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 2,
-                        size_min: 0.1,
-                        sync: false
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
                     }
                 },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#8C4FFF',
-                    opacity: 0.2,
-                    width: 1
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#4F8CFF",
+                    "opacity": 0.2,
+                    "width": 1
                 },
-                move: {
-                    enable: true,
-                    speed: 1,
-                    direction: 'none',
-                    random: true,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false,
-                    attract: {
-                        enable: false,
-                        rotateX: 600,
-                        rotateY: 1200
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": true,
+                        "rotateX": 600,
+                        "rotateY": 1200
                     }
                 }
             },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: 'grab'
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
                     },
-                    onclick: {
-                        enable: true,
-                        mode: 'push'
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
                     },
-                    resize: true
+                    "resize": true
                 },
-                modes: {
-                    grab: {
-                        distance: 140,
-                        line_linked: {
-                            opacity: 0.5
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 0.6
                         }
                     },
-                    push: {
-                        particles_nb: 4
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
                     }
                 }
             },
-            retina_detect: true
+            "retina_detect": true
         });
     } else {
-        console.warn('particles.js not loaded. Particle effects will not be displayed.');
+        console.warn('particles.js not loaded. Particle background will not be displayed.');
     }
 }
 
@@ -264,31 +291,48 @@ function initializeParticles() {
  * Requires Chart.js library
  */
 function initializeCharts() {
-    // Check if Chart.js is loaded
-    if (typeof Chart !== 'undefined') {
-        const chartCanvases = document.querySelectorAll('.tooltip-chart');
+    // Get all strategy cards with data-history attribute
+    const strategyCards = document.querySelectorAll('.strategy-card[data-history]');
+    
+    strategyCards.forEach(card => {
+        // Get the history data from the data attribute
+        const historyData = JSON.parse(card.getAttribute('data-history'));
+        const chartContainer = card.querySelector('.apy-chart');
         
-        chartCanvases.forEach(canvas => {
-            const ctx = canvas.getContext('2d');
+        if (!chartContainer) {
+            // Create chart container if it doesn't exist
+            const chartDiv = document.createElement('div');
+            chartDiv.className = 'apy-chart-container';
             
-            // Sample data - in production, this would be loaded from an API
-            const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-            const data = {
-                labels: labels,
-                datasets: [{
-                    label: 'Historical APY %',
-                    data: [12, 19, 15, 17, 14, 18],
-                    fill: true,
-                    backgroundColor: 'rgba(140, 79, 255, 0.2)',
-                    borderColor: 'rgba(140, 79, 255, 1)',
-                    tension: 0.4
-                }]
-            };
+            const canvas = document.createElement('canvas');
+            canvas.className = 'apy-chart';
+            canvas.height = 100;
+            
+            chartDiv.appendChild(canvas);
+            
+            // Add chart after the APY range
+            const apyRange = card.querySelector('.apy-range');
+            apyRange.after(chartDiv);
             
             // Create the chart
-            new Chart(ctx, {
+            new Chart(canvas, {
                 type: 'line',
-                data: data,
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'APY %',
+                        data: historyData,
+                        borderColor: '#8C4FFF',
+                        backgroundColor: 'rgba(140, 79, 255, 0.1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#4F8CFF',
+                        pointBorderColor: '#4F8CFF',
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
@@ -298,109 +342,79 @@ function initializeCharts() {
                         },
                         tooltip: {
                             backgroundColor: 'rgba(20, 23, 38, 0.9)',
-                            titleColor: '#fff',
-                            bodyColor: '#fff',
-                            borderColor: 'rgba(140, 79, 255, 0.5)',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#FFFFFF',
+                            borderColor: 'rgba(140, 79, 255, 0.3)',
                             borderWidth: 1,
-                            padding: 10,
-                            displayColors: false
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return `APY: ${context.parsed.y}%`;
+                                }
+                            }
                         }
                     },
                     scales: {
                         x: {
                             grid: {
-                                display: false,
-                                drawBorder: false
+                                display: false
                             },
                             ticks: {
-                                color: 'rgba(255, 255, 255, 0.5)',
-                                font: {
-                                    size: 10
-                                }
+                                color: 'rgba(255, 255, 255, 0.7)'
                             }
                         },
                         y: {
                             grid: {
-                                color: 'rgba(255, 255, 255, 0.1)',
-                                drawBorder: false
+                                color: 'rgba(255, 255, 255, 0.1)'
                             },
                             ticks: {
-                                color: 'rgba(255, 255, 255, 0.5)',
-                                font: {
-                                    size: 10
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                callback: function(value) {
+                                    return value + '%';
                                 }
                             }
                         }
                     }
                 }
             });
-        });
-    } else {
-        console.warn('Chart.js not loaded. Strategy charts will not be displayed.');
-    }
+        }
+    });
 }
 
 /**
- * Mobile navigation toggle
+ * Toggle mobile navigation
  */
 function toggleMobileNav() {
     const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-    const nav = document.querySelector('.header-nav');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+    const body = document.body;
     
-    mobileNavToggle.classList.toggle('active');
-    nav.classList.toggle('active');
+    if (!mobileNavToggle || !mobileNav) return;
     
-    // Prevent scrolling when menu is open
-    document.body.classList.toggle('no-scroll', nav.classList.contains('active'));
+    mobileNavToggle.addEventListener('click', () => {
+        mobileNavToggle.classList.toggle('active');
+        mobileNav.classList.toggle('active');
+        mobileNavOverlay.classList.toggle('active');
+        body.classList.toggle('no-scroll');
+    });
     
-    // Close mobile nav when clicking outside
-    if (nav.classList.contains('active')) {
-        document.addEventListener('click', closeOnClickOutside);
-    } else {
-        document.removeEventListener('click', closeOnClickOutside);
-    }
-}
-
-/**
- * Close mobile navigation when clicking outside
- */
-function closeOnClickOutside(event) {
-    const nav = document.querySelector('.header-nav');
-    const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-    
-    // If clicking outside the nav and not on the toggle button
-    if (!nav.contains(event.target) && !mobileNavToggle.contains(event.target)) {
-        mobileNavToggle.classList.remove('active');
-        nav.classList.remove('active');
-        document.body.classList.remove('no-scroll');
-        document.removeEventListener('click', closeOnClickOutside);
-    }
-}
-
-// Add mobile nav toggle button event listener
-document.addEventListener('DOMContentLoaded', () => {
-    const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-    const navLinks = document.querySelectorAll('.header-nav .nav-link');
-    
-    if (mobileNavToggle) {
-        mobileNavToggle.addEventListener('click', function(event) {
-            event.stopPropagation();
-            toggleMobileNav();
-        });
-    }
-    
-    // Close mobile nav when clicking on a nav link
-    navLinks.forEach(link => {
+    // Close mobile nav when clicking on a link
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(link => {
         link.addEventListener('click', () => {
-            const nav = document.querySelector('.header-nav');
-            const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-            
-            if (nav.classList.contains('active')) {
-                mobileNavToggle.classList.remove('active');
-                nav.classList.remove('active');
-                document.body.classList.remove('no-scroll');
-                document.removeEventListener('click', closeOnClickOutside);
-            }
+            mobileNavToggle.classList.remove('active');
+            mobileNav.classList.remove('active');
+            mobileNavOverlay.classList.remove('active');
+            body.classList.remove('no-scroll');
         });
     });
-});
+    
+    // Close mobile nav when clicking outside
+    mobileNavOverlay.addEventListener('click', () => {
+        mobileNavToggle.classList.remove('active');
+        mobileNav.classList.remove('active');
+        mobileNavOverlay.classList.remove('active');
+        body.classList.remove('no-scroll');
+    });
+}

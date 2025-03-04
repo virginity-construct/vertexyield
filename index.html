@@ -21,8 +21,20 @@
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for APY visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader">
+            <svg class="spinner" viewBox="0 0 50 50">
+                <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+            </svg>
+        </div>
+    </div>
+
     <!-- Particle Background Container -->
     <div id="particles-js" class="particles-container"></div>
     
@@ -49,6 +61,19 @@
                     <span></span>
                 </button>
             </nav>
+            
+            <!-- Mobile Navigation -->
+            <div class="mobile-nav">
+                <div class="mobile-nav-links">
+                    <a href="#strategies" class="mobile-nav-link">Yield Strategies</a>
+                    <a href="#about" class="mobile-nav-link">About</a>
+                    <a href="#whitepaper" class="mobile-nav-link">Whitepaper</a>
+                    <a href="#apply" class="mobile-nav-link highlight">Join Pilot Program</a>
+                </div>
+            </div>
+            
+            <!-- Mobile Nav Overlay -->
+            <div class="mobile-nav-overlay"></div>
         </div>
     </header>
     
@@ -65,7 +90,7 @@
                 <div class="hero-cta">
                     <a href="#apply" class="btn btn-primary btn-large">Join Pilot Program</a>
                 </div>
-                
+
                 <div class="hero-metrics">
                     <div class="metric">
                         <div class="metric-value" data-value="500">0</div>
@@ -80,24 +105,15 @@
                         <div class="metric-label">Solana TPS</div>
                     </div>
                     <div class="metric">
-                        <div class="metric-value" data-value="100">0</div>
-                        <div class="metric-label">Projected DeFi Growth by 2026 (B+)</div>
+                        <div class="metric-value" data-value="50">0</div>
+                        <div class="metric-label">Max APY (%)</div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="hero-visual">
-                <div class="orbit-container">
-                    <div class="orbit orbit-1"></div>
-                    <div class="orbit orbit-2"></div>
-                    <div class="orbit orbit-3"></div>
-                    <div class="glow-center"></div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- Yield Strategies Section -->
+    <!-- Strategies Section -->
     <section class="strategies" id="strategies">
         <div class="container">
             <h2 class="section-title">Yield Strategies</h2>
@@ -110,82 +126,42 @@
                         <h3>Liquid Staking + Jito MEV Rewards</h3>
                         <div class="apy-range">
                             <span class="apy-value">7% - 15%</span>
-                            <span class="apy-label">APY</span>
                         </div>
                     </div>
-                    <p class="strategy-description">
-                        Maximize yield with Solana liquid staking and MEV extraction.
-                    </p>
-                    <div class="info-icon"><i class="fas fa-info-circle"></i></div>
-                    <div class="strategy-tooltip">
-                        <h4>Historical APY</h4>
-                        <div class="tooltip-chart">
-                            <canvas class="history-chart"></canvas>
-                        </div>
-                    </div>
+                    <p class="strategy-description">Maximize yield with Solana liquid staking and MEV extraction.</p>
                 </div>
                 
                 <!-- Strategy 2 -->
-                <div class="strategy-card" data-history="[10, 15, 18, 22, 25]">
+                <div class="strategy-card" data-history="[12, 18, 22, 25, 30]">
                     <div class="strategy-header">
                         <h3>High-Frequency Trading (HFT) Vaults</h3>
                         <div class="apy-range">
-                            <span class="apy-value">10% - 25%</span>
-                            <span class="apy-label">APY</span>
+                            <span class="apy-value">12% - 30%</span>
                         </div>
                     </div>
-                    <p class="strategy-description">
-                        Deploy capital into automated, low-latency trading strategies.
-                    </p>
-                    <div class="info-icon"><i class="fas fa-info-circle"></i></div>
-                    <div class="strategy-tooltip">
-                        <h4>Historical APY</h4>
-                        <div class="tooltip-chart">
-                            <canvas class="history-chart"></canvas>
-                        </div>
-                    </div>
+                    <p class="strategy-description">Deploy capital into automated, low-latency trading strategies.</p>
                 </div>
                 
                 <!-- Strategy 3 -->
-                <div class="strategy-card" data-history="[12, 18, 25, 30, 35]">
+                <div class="strategy-card" data-history="[10, 15, 18, 20, 25]">
                     <div class="strategy-header">
                         <h3>Funding Rate Arbitrage on Solana Perps</h3>
                         <div class="apy-range">
-                            <span class="apy-value">12% - 35%</span>
-                            <span class="apy-label">APY</span>
+                            <span class="apy-value">10% - 25%</span>
                         </div>
                     </div>
-                    <p class="strategy-description">
-                        Capture yield from perpetual funding rate discrepancies across Solana DEXs.
-                    </p>
-                    <div class="info-icon"><i class="fas fa-info-circle"></i></div>
-                    <div class="strategy-tooltip">
-                        <h4>Historical APY</h4>
-                        <div class="tooltip-chart">
-                            <canvas class="history-chart"></canvas>
-                        </div>
-                    </div>
+                    <p class="strategy-description">Capture yield from perpetual funding rate discrepancies across Solana DEXs.</p>
                 </div>
                 
                 <!-- Strategy 4 -->
-                <div class="strategy-card" data-history="[15, 25, 35, 45, 50]">
+                <div class="strategy-card" data-history="[25, 30, 35, 40, 50]">
                     <div class="strategy-header">
                         <h3>Automated Solana MEV Capture</h3>
                         <div class="apy-range">
-                            <span class="apy-value">15% - 50%</span>
-                            <span class="apy-label">APY</span>
+                            <span class="apy-value">25% - 50%</span>
                         </div>
                     </div>
-                    <p class="strategy-description">
-                        Front-run inefficiencies with low-latency MEV extraction.
-                    </p>
-                    <div class="info-icon"><i class="fas fa-info-circle"></i></div>
-                    <div class="strategy-tooltip">
-                        <h4>Historical APY</h4>
-                        <div class="tooltip-chart">
-                            <canvas class="history-chart"></canvas>
-                        </div>
-                    </div>
+                    <p class="strategy-description">Front-run inefficiencies with low-latency MEV extraction.</p>
                 </div>
                 
                 <!-- Strategy 5 -->
@@ -194,19 +170,9 @@
                         <h3>RWA Yield on Solana (Tokenized US Treasuries & Credit)</h3>
                         <div class="apy-range">
                             <span class="apy-value">5% - 12%</span>
-                            <span class="apy-label">APY</span>
                         </div>
                     </div>
-                    <p class="strategy-description">
-                        Institutional-grade RWA exposure with Solana speed.
-                    </p>
-                    <div class="info-icon"><i class="fas fa-info-circle"></i></div>
-                    <div class="strategy-tooltip">
-                        <h4>Historical APY</h4>
-                        <div class="tooltip-chart">
-                            <canvas class="history-chart"></canvas>
-                        </div>
-                    </div>
+                    <p class="strategy-description">Institutional-grade RWA exposure with Solana speed.</p>
                 </div>
             </div>
         </div>
@@ -215,42 +181,40 @@
     <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
-            <div class="about-content">
-                <h2 class="section-title">About Vertexyield</h2>
-                <p class="section-subtitle">Institutional-grade yield platform built for Solana and multi-chain expansion</p>
+            <h2 class="section-title">About Vertexyield</h2>
+            <p class="section-subtitle">Institutional-grade yield platform built for Solana and multi-chain expansion</p>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Institutional-Grade Security</h3>
+                    <p>Multi-sig wallets, time-locked contracts, and regular security audits.</p>
+                </div>
                 
-                <div class="about-features">
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>Institutional-Grade Security</h3>
-                        <p>Multi-sig wallets, time-locked contracts, and regular security audits.</p>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
                     </div>
-                    
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-network-wired"></i>
-                        </div>
-                        <h3>Multi-Chain Ready</h3>
-                        <p>Starting with Solana, expanding to Ethereum, Avalanche, and more.</p>
+                    <h3>Multi-Chain Ready</h3>
+                    <p>Starting with Solana, expanding to Ethereum, Avalanche, and more.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
                     </div>
-                    
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Algorithmic Optimization</h3>
-                        <p>AI-powered yield strategies that adapt to market conditions.</p>
+                    <h3>Algorithmic Optimization</h3>
+                    <p>AI-powered yield strategies that adapt to market conditions.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-contract"></i>
                     </div>
-                    
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-file-contract"></i>
-                        </div>
-                        <h3>Compliance-Focused</h3>
-                        <p>KYC/AML procedures and regulatory compliance for institutional clients.</p>
-                    </div>
+                    <h3>Compliance-Focused</h3>
+                    <p>KYC/AML procedures and regulatory compliance for institutional clients.</p>
                 </div>
             </div>
         </div>
@@ -329,8 +293,20 @@
     </footer>
     
     <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // Handle loading screen
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingScreen = document.querySelector('.loading-screen');
+            
+            // Hide loading screen after all content is loaded
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                }, 800); // Add a slight delay for smoother transition
+            });
+        });
+    </script>
 </body>
 </html>
