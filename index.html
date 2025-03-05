@@ -18,12 +18,46 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/whitepaper.css">
     
     <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Chart.js for APY visualizations -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Override styles to fix visibility issues -->
+    <style>
+        body {
+            overflow: auto !important;
+        }
+        
+        section {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            z-index: 1 !important;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex !important;
+            align-items: center !important;
+            padding-top: 80px !important;
+            padding-bottom: 2rem !important;
+            position: relative !important;
+            z-index: 1 !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            background-color: var(--color-bg) !important;
+        }
+        
+        .about, .strategies, .how-it-works, .whitepaper {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+    </style>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -33,6 +67,7 @@
                 <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
             </svg>
         </div>
+        <div class="loading-text">Initializing VertexYield</div>
     </div>
 
     <!-- Particle Background Container -->
@@ -48,8 +83,9 @@
                     </a>
                 </div>
                 <div class="header-nav">
-                    <a href="#strategies" class="nav-link">Yield Strategies</a>
                     <a href="#about" class="nav-link">About</a>
+                    <a href="#strategies" class="nav-link">Yield Strategies</a>
+                    <a href="#how-it-works" class="nav-link">How It Works</a>
                     <a href="#whitepaper" class="nav-link">Whitepaper</a>
                 </div>
                 <div class="header-actions">
@@ -65,8 +101,9 @@
             <!-- Mobile Navigation -->
             <div class="mobile-nav">
                 <div class="mobile-nav-links">
-                    <a href="#strategies" class="mobile-nav-link">Yield Strategies</a>
                     <a href="#about" class="mobile-nav-link">About</a>
+                    <a href="#strategies" class="mobile-nav-link">Yield Strategies</a>
+                    <a href="#how-it-works" class="mobile-nav-link">How It Works</a>
                     <a href="#whitepaper" class="mobile-nav-link">Whitepaper</a>
                     <a href="#apply" class="mobile-nav-link highlight">Join Pilot Program</a>
                 </div>
@@ -108,6 +145,48 @@
                         <div class="metric-value" data-value="50">0</div>
                         <div class="metric-label">Max APY (%)</div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Vertexyield</h2>
+            <p class="section-subtitle">Institutional-grade yield platform built for Solana and multi-chain expansion</p>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Institutional-Grade Security</h3>
+                    <p>Multi-sig wallets, time-locked contracts, and regular security audits.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Multi-Chain Ready</h3>
+                    <p>Starting with Solana, expanding to Ethereum, Avalanche, and more.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Algorithmic Optimization</h3>
+                    <p>AI-powered yield strategies that adapt to market conditions.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3>Compliance-Focused</h3>
+                    <p>KYC/AML procedures and regulatory compliance for institutional clients.</p>
                 </div>
             </div>
         </div>
@@ -178,43 +257,43 @@
         </div>
     </section>
     
-    <!-- About Section -->
-    <section class="about" id="about">
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
         <div class="container">
-            <h2 class="section-title">About Vertexyield</h2>
-            <p class="section-subtitle">Institutional-grade yield platform built for Solana and multi-chain expansion</p>
+            <h2 class="section-title">How VertexYield Works</h2>
+            <p class="section-subtitle">Our institutional-grade platform delivers superior yields through a sophisticated process</p>
             
-            <div class="features-grid">
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Capital Allocation</h3>
+                        <p>Institutional funds are allocated across multiple yield strategies based on risk profiles, market conditions, and performance metrics. Our proprietary algorithm continuously rebalances allocations to maximize returns.</p>
                     </div>
-                    <h3>Institutional-Grade Security</h3>
-                    <p>Multi-sig wallets, time-locked contracts, and regular security audits.</p>
                 </div>
                 
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-network-wired"></i>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Strategy Execution</h3>
+                        <p>Our low-latency infrastructure executes strategies with microsecond precision on Solana's high-performance network. Custom-built execution algorithms minimize slippage and maximize capture of yield opportunities.</p>
                     </div>
-                    <h3>Multi-Chain Ready</h3>
-                    <p>Starting with Solana, expanding to Ethereum, Avalanche, and more.</p>
                 </div>
                 
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-robot"></i>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Risk Management</h3>
+                        <p>Sophisticated risk management systems monitor positions 24/7 with automatic circuit breakers and position sizing algorithms. Multi-layered security protocols protect assets while maintaining operational efficiency.</p>
                     </div>
-                    <h3>Algorithmic Optimization</h3>
-                    <p>AI-powered yield strategies that adapt to market conditions.</p>
                 </div>
                 
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-file-contract"></i>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h3>Yield Distribution</h3>
+                        <p>Yields are calculated and distributed according to institutional requirements - whether as automated compounding, regular distributions, or custom schedules. Complete transparency with detailed reporting and analytics.</p>
                     </div>
-                    <h3>Compliance-Focused</h3>
-                    <p>KYC/AML procedures and regulatory compliance for institutional clients.</p>
                 </div>
             </div>
         </div>
@@ -232,8 +311,84 @@
                 </div>
                 <div class="whitepaper-info">
                     <h3>Vertexyield: Institutional DeFi Yield Optimization</h3>
-                    <p>Our comprehensive whitepaper details our approach to generating sustainable yield through MEV extraction, high-frequency trading, and innovative staking strategies on Solana.</p>
+                    <p>Our comprehensive whitepaper details our approach to generating sustainable yield through MEV extraction, high-frequency trading, and innovative staking strategies on Solana. Developed by a team of quantitative finance experts and blockchain engineers, our whitepaper provides a technical deep-dive into our architecture, risk management framework, and yield generation methodologies.</p>
                     <a href="#" class="btn btn-secondary">Download Whitepaper</a>
+                </div>
+            </div>
+            
+            <div class="whitepaper-highlights">
+                <div class="whitepaper-highlight">
+                    <div class="whitepaper-highlight-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Quantitative Methodology</h4>
+                    <p>Detailed analysis of our proprietary yield optimization algorithms, backtesting results, and statistical performance metrics across market conditions.</p>
+                </div>
+                
+                <div class="whitepaper-highlight">
+                    <div class="whitepaper-highlight-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Risk Management Framework</h4>
+                    <p>Comprehensive overview of our multi-layered risk management approach, including VaR modeling, stress testing, and automated circuit breakers.</p>
+                </div>
+                
+                <div class="whitepaper-highlight">
+                    <div class="whitepaper-highlight-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h4>Technical Architecture</h4>
+                    <p>In-depth explanation of our low-latency infrastructure, custom execution algorithms, and integration with Solana's high-performance network.</p>
+                </div>
+                
+                <div class="whitepaper-highlight">
+                    <div class="whitepaper-highlight-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h4>Security Protocols</h4>
+                    <p>Detailed breakdown of our institutional-grade security measures, including multi-sig wallets, time-locked contracts, and audit procedures.</p>
+                </div>
+            </div>
+            
+            <div class="whitepaper-chapters">
+                <div class="whitepaper-chapter">
+                    <div class="chapter-number">01</div>
+                    <div class="chapter-content">
+                        <h4>Introduction to Institutional DeFi</h4>
+                        <p>Overview of the institutional DeFi landscape, market opportunities, and Vertexyield's position within the ecosystem. Includes analysis of current yield generation challenges and our innovative solutions.</p>
+                    </div>
+                </div>
+                
+                <div class="whitepaper-chapter">
+                    <div class="chapter-number">02</div>
+                    <div class="chapter-content">
+                        <h4>Solana MEV Extraction Methodology</h4>
+                        <p>Technical deep-dive into our MEV extraction strategies, including sandwich trading, arbitrage opportunities, and liquidation frontrunning with institutional-grade risk controls.</p>
+                    </div>
+                </div>
+                
+                <div class="whitepaper-chapter">
+                    <div class="chapter-number">03</div>
+                    <div class="chapter-content">
+                        <h4>High-Frequency Trading on Solana</h4>
+                        <p>Detailed explanation of our HFT infrastructure, including order execution algorithms, market-making strategies, and latency optimization techniques.</p>
+                    </div>
+                </div>
+                
+                <div class="whitepaper-chapter">
+                    <div class="chapter-number">04</div>
+                    <div class="chapter-content">
+                        <h4>Risk Management & Compliance</h4>
+                        <p>Comprehensive overview of our risk management framework, including position sizing, drawdown controls, and regulatory compliance measures for institutional clients.</p>
+                    </div>
+                </div>
+                
+                <div class="whitepaper-chapter">
+                    <div class="chapter-number">05</div>
+                    <div class="chapter-content">
+                        <h4>Multi-Chain Expansion Roadmap</h4>
+                        <p>Strategic vision for expanding our yield strategies beyond Solana to Ethereum, Avalanche, and other high-performance blockchains, with technical implementation details.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -265,8 +420,9 @@
                 <div class="footer-links">
                     <div class="footer-column">
                         <h3>Platform</h3>
-                        <a href="#strategies">Yield Strategies</a>
                         <a href="#about">About</a>
+                        <a href="#strategies">Yield Strategies</a>
+                        <a href="#how-it-works">How It Works</a>
                         <a href="#whitepaper">Whitepaper</a>
                     </div>
                     

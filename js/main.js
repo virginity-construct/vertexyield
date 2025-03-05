@@ -13,17 +13,32 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', () => {
         setTimeout(() => {
             loadingScreen.classList.add('hidden');
-        }, 800); // Add a slight delay for smoother transition
+            // Start animations after loading screen is hidden
+            setTimeout(() => {
+                initializeAnimations();
+            }, 300);
+        }, 1200); // Slightly longer delay for a more polished transition
     });
     
     // Initialize all components
-    initializeAnimations();
     initializeScrollEffects();
     initializeTooltips();
     initializeMetricsCounter();
     initializeParticles();
     initializeCharts();
+    initializeNavbarScroll();
     toggleMobileNav();
+    
+    // Ensure hero section is visible
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+        heroSection.style.opacity = '1';
+        heroSection.style.visibility = 'visible';
+        heroSection.style.display = 'flex';
+    }
+
+    // Remove any scroll event listeners that might affect section visibility
+    window.onscroll = null;
 });
 
 /**
@@ -32,22 +47,30 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeAnimations() {
     // Add animation class to hero elements
     document.querySelector('.hero-title').classList.add('animate');
-    document.querySelector('.hero-subtitle').classList.add('animate');
-    document.querySelector('.hero-buttons').classList.add('animate');
+    
+    setTimeout(() => {
+        document.querySelector('.hero-subtitle').classList.add('animate');
+    }, 200);
+    
+    setTimeout(() => {
+        document.querySelector('.hero-cta').classList.add('animate');
+    }, 400);
     
     // Animate hero metrics with delay
     const metrics = document.querySelectorAll('.metric');
     metrics.forEach((metric, index) => {
         setTimeout(() => {
             metric.classList.add('animate');
-        }, 300 + (index * 150));
+        }, 600 + (index * 200));
     });
-    
-    // Animate orbit in hero visual
-    const orbit = document.querySelector('.orbit');
-    if (orbit) {
-        orbit.classList.add('animate');
-    }
+
+    // Make sure all sections and their elements are visible
+    document.querySelectorAll('.strategy-card, .feature, .whitepaper-preview, .whitepaper-highlight, .whitepaper-chapter, .cta-content').forEach(element => {
+        element.style.opacity = '1';
+        element.style.visibility = 'visible';
+        element.style.transform = 'translateY(0)';
+        element.classList.add('animate');
+    });
 }
 
 /**
@@ -59,6 +82,8 @@ function initializeScrollEffects() {
         '.strategy-card',
         '.feature',
         '.whitepaper-preview',
+        '.whitepaper-highlight',
+        '.whitepaper-chapter',
         '.cta-content'
     ];
     
@@ -67,19 +92,24 @@ function initializeScrollEffects() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate');
+                entry.target.style.opacity = '1';
+                entry.target.style.visibility = 'visible';
+                entry.target.style.transform = 'translateY(0)';
                 // Unobserve after animation is triggered
                 observer.unobserve(entry.target);
             }
         });
     }, {
         root: null, // viewport
-        threshold: 0.1, // trigger when 10% visible
+        threshold: 0.15, // trigger when 15% visible
         rootMargin: '-50px'
     });
     
     // Observe all elements that should animate on scroll
     animateElements.forEach(selector => {
-        document.querySelectorAll(selector).forEach(element => {
+        document.querySelectorAll(selector).forEach((element, index) => {
+            // Add staggered delay based on index
+            element.style.animationDelay = `${index * 0.1}s`;
             observer.observe(element);
         });
     });
@@ -87,11 +117,57 @@ function initializeScrollEffects() {
     // Parallax effect for hero section
     window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY;
-        const heroVisual = document.querySelector('.hero-visual');
         
-        if (heroVisual) {
-            heroVisual.style.transform = `translateY(${scrollPosition * 0.1}px)`;
+        // Subtle parallax for background elements
+        const particles = document.querySelector('#particles-js');
+        if (particles) {
+            particles.style.transform = `translateY(${scrollPosition * 0.05}px)`;
         }
+    });
+}
+
+/**
+ * Initialize navbar scroll behavior
+ */
+function initializeNavbarScroll() {
+    const header = document.querySelector('.header');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+    
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                // Close mobile nav if open
+                const mobileNav = document.querySelector('.mobile-nav');
+                const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+                const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+                
+                if (mobileNav.classList.contains('active')) {
+                    mobileNav.classList.remove('active');
+                    mobileNavToggle.classList.remove('active');
+                    mobileNavOverlay.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
+                }
+                
+                // Smooth scroll to target
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
 }
 
@@ -129,7 +205,7 @@ function initializeMetricsCounter() {
         const targetValue = parseFloat(metric.getAttribute('data-value'));
         const prefix = metric.getAttribute('data-prefix') || '';
         const suffix = metric.getAttribute('data-suffix') || '';
-        const duration = 2000; // 2 seconds
+        const duration = 2500; // 2.5 seconds
         const decimals = metric.getAttribute('data-decimals') || 0;
         const startValue = 0;
         
@@ -139,7 +215,10 @@ function initializeMetricsCounter() {
         function animateCounter(timestamp) {
             if (!startTime) startTime = timestamp;
             const progress = Math.min((timestamp - startTime) / duration, 1);
-            const currentValue = startValue + (progress * (targetValue - startValue));
+            
+            // Use easeOutExpo for more natural counting animation
+            const easeOutExpo = 1 - Math.pow(2, -10 * progress);
+            const currentValue = startValue + (easeOutExpo * (targetValue - startValue));
             
             // Format the number with commas and decimal places
             const formattedValue = new Intl.NumberFormat('en-US', {
@@ -158,7 +237,10 @@ function initializeMetricsCounter() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    requestAnimationFrame(animateCounter);
+                    // Add a small delay before starting the counter
+                    setTimeout(() => {
+                        requestAnimationFrame(animateCounter);
+                    }, 300);
                     observer.unobserve(entry.target);
                 }
             });
@@ -171,11 +253,10 @@ function initializeMetricsCounter() {
 }
 
 /**
- * Initialize particle background effect
- * Requires particles.js library
+ * Initialize particles.js background
  */
 function initializeParticles() {
-    if (typeof particlesJS !== 'undefined') {
+    if (window.particlesJS) {
         particlesJS('particles-js', {
             "particles": {
                 "number": {
@@ -199,7 +280,7 @@ function initializeParticles() {
                     }
                 },
                 "opacity": {
-                    "value": 0.5,
+                    "value": 0.3,
                     "random": true,
                     "anim": {
                         "enable": true,
@@ -234,7 +315,7 @@ function initializeParticles() {
                     "out_mode": "out",
                     "bounce": false,
                     "attract": {
-                        "enable": true,
+                        "enable": false,
                         "rotateX": 600,
                         "rotateY": 1200
                     }
@@ -257,7 +338,7 @@ function initializeParticles() {
                     "grab": {
                         "distance": 140,
                         "line_linked": {
-                            "opacity": 0.6
+                            "opacity": 0.5
                         }
                     },
                     "bubble": {
@@ -282,7 +363,7 @@ function initializeParticles() {
             "retina_detect": true
         });
     } else {
-        console.warn('particles.js not loaded. Particle background will not be displayed.');
+        console.error("particles.js not loaded");
     }
 }
 
@@ -295,89 +376,74 @@ function initializeCharts() {
     const strategyCards = document.querySelectorAll('.strategy-card[data-history]');
     
     strategyCards.forEach(card => {
-        // Get the history data from the data attribute
+        // Get APY history data
         const historyData = JSON.parse(card.getAttribute('data-history'));
-        const chartContainer = card.querySelector('.apy-chart');
+        const chartContainer = document.createElement('div');
+        chartContainer.className = 'strategy-chart';
         
-        if (!chartContainer) {
-            // Create chart container if it doesn't exist
-            const chartDiv = document.createElement('div');
-            chartDiv.className = 'apy-chart-container';
-            
-            const canvas = document.createElement('canvas');
-            canvas.className = 'apy-chart';
-            canvas.height = 100;
-            
-            chartDiv.appendChild(canvas);
-            
-            // Add chart after the APY range
-            const apyRange = card.querySelector('.apy-range');
-            apyRange.after(chartDiv);
-            
-            // Create the chart
-            new Chart(canvas, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-                    datasets: [{
-                        label: 'APY %',
-                        data: historyData,
-                        borderColor: '#8C4FFF',
-                        backgroundColor: 'rgba(140, 79, 255, 0.1)',
-                        borderWidth: 2,
-                        pointBackgroundColor: '#4F8CFF',
-                        pointBorderColor: '#4F8CFF',
-                        pointRadius: 4,
-                        pointHoverRadius: 6,
-                        tension: 0.4,
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(20, 23, 38, 0.9)',
-                            titleColor: '#FFFFFF',
-                            bodyColor: '#FFFFFF',
-                            borderColor: 'rgba(140, 79, 255, 0.3)',
-                            borderWidth: 1,
-                            displayColors: false,
-                            callbacks: {
-                                label: function(context) {
-                                    return `APY: ${context.parsed.y}%`;
-                                }
-                            }
-                        }
+        // Create canvas for chart
+        const canvas = document.createElement('canvas');
+        chartContainer.appendChild(canvas);
+        
+        // Add chart container to card
+        card.appendChild(chartContainer);
+        
+        // Create chart
+        new Chart(canvas, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                datasets: [{
+                    label: 'APY %',
+                    data: historyData,
+                    borderColor: '#8C4FFF',
+                    backgroundColor: 'rgba(140, 79, 255, 0.1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#4F8CFF',
+                    pointBorderColor: '#FFFFFF',
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
                     },
-                    scales: {
-                        x: {
-                            grid: {
-                                display: false
-                            },
-                            ticks: {
-                                color: 'rgba(255, 255, 255, 0.7)'
-                            }
-                        },
-                        y: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: 'rgba(255, 255, 255, 0.7)',
-                                callback: function(value) {
-                                    return value + '%';
-                                }
+                    tooltip: {
+                        backgroundColor: 'rgba(13, 15, 26, 0.9)',
+                        titleColor: '#FFFFFF',
+                        bodyColor: '#FFFFFF',
+                        borderColor: 'rgba(140, 79, 255, 0.3)',
+                        borderWidth: 1,
+                        padding: 10,
+                        displayColors: false,
+                        callbacks: {
+                            label: function(context) {
+                                return `APY: ${context.parsed.y}%`;
                             }
                         }
                     }
+                },
+                scales: {
+                    x: {
+                        display: false
+                    },
+                    y: {
+                        display: false,
+                        min: 0
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
                 }
-            });
-        }
+            }
+        });
     });
 }
 
@@ -388,33 +454,31 @@ function toggleMobileNav() {
     const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
     const mobileNav = document.querySelector('.mobile-nav');
     const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
-    const body = document.body;
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
     
-    if (!mobileNavToggle || !mobileNav) return;
-    
+    // Toggle mobile navigation
     mobileNavToggle.addEventListener('click', () => {
         mobileNavToggle.classList.toggle('active');
         mobileNav.classList.toggle('active');
         mobileNavOverlay.classList.toggle('active');
-        body.classList.toggle('no-scroll');
+        document.body.classList.toggle('no-scroll');
     });
     
-    // Close mobile nav when clicking on a link
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    // Close mobile navigation when clicking on overlay
+    mobileNavOverlay.addEventListener('click', () => {
+        mobileNavToggle.classList.remove('active');
+        mobileNav.classList.remove('active');
+        mobileNavOverlay.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+    });
+    
+    // Close mobile navigation when clicking on a link
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', () => {
             mobileNavToggle.classList.remove('active');
             mobileNav.classList.remove('active');
             mobileNavOverlay.classList.remove('active');
-            body.classList.remove('no-scroll');
+            document.body.classList.remove('no-scroll');
         });
-    });
-    
-    // Close mobile nav when clicking outside
-    mobileNavOverlay.addEventListener('click', () => {
-        mobileNavToggle.classList.remove('active');
-        mobileNav.classList.remove('active');
-        mobileNavOverlay.classList.remove('active');
-        body.classList.remove('no-scroll');
     });
 }
